@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
     locales \
-    jpegoptim optipng pngquant gifscale \
+    jpegoptim optipng pngquant gifsicle \  # Mengganti gifscale dengan gifsicle
     vim \
     unzip \
     git \
