@@ -18,13 +18,7 @@ RUN apt-get update && apt-get install -y \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
     locales \
-    jpegoptim optipng pngquant gifsicle \  # Mengganti gifscale dengan gifsicle
-    vim \
-    unzip \
-    git \
-    curl \
-    libzip-dev \
-    zip \
+    jpegoptim optipng pngquant gifsicle vim unzip git curl libzip-dev zip \
     && docker-php-ext-install pdo pdo_mysql gd zip \
     && curl -sS https://getcomposer.org/installer | php --install-dir=/usr/local/bin --filename=composer \
     && groupadd -g 1000 www \
