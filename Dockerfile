@@ -27,7 +27,8 @@ RUN apt-get update && apt-get install -y \
     && useradd -u 1000 -ms /bin/bash -g www www
 
 # Menyalin file aplikasi ke dalam container dan mengubah kepemilikan file
-COPY . /var/www/devops --chown=www:www  # Pastikan file aplikasi disalin dengan benar
+# Memastikan direktori target sudah ada dan menggunakan chown dengan benar
+COPY . /var/www/devops/ --chown=www:www
 
 # Menentukan user yang digunakan untuk menjalankan aplikasi
 USER www
