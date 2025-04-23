@@ -56,7 +56,7 @@ services:
       - devops
 
 networks:
-  laraveldocker:
+  devops:
     driver: bridge
 
 volumes:
