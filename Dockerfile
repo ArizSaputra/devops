@@ -1,12 +1,15 @@
 FROM php:8.0-fpm
 
+# Membuat direktori jika belum ada
+RUN mkdir -p /var/www/devops
+
 # Menyalin composer.* ke dalam direktori kerja di container
-COPY composer.* /var/www/devops
+COPY composer.* /var/www/devops/
 
 # Menentukan direktori kerja di dalam container
 WORKDIR /var/www/devops
 
-# Menginstal dependensi yang dibutuhkan
+# Menginstal dependensi yang dibutuhkan dalam satu RUN untuk mengurangi lapisan
 RUN apt-get update && apt-get install -y \
     build-essential \
     libmcrypt-dev \
@@ -21,22 +24,13 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     libzip-dev \
-    zip
+    zip \
+    && docker-php-ext-install pdo pdo_mysql gd zip \
+    && curl -sS https://getcomposer.org/installer | php --install-dir=/usr/local/bin --filename=composer \
+    && groupadd -g 1000 www \
+    && useradd -u 1000 -ms /bin/bash -g www www
 
-# Menjalankan perintah untuk instalasi ekstensi PHP yang diperlukan
-RUN docker-php-ext-install pdo pdo_mysql gd zip
-
-# Mengunduh dan menginstal Composer
-RUN curl -sS https://getcomposer.org/installer | php --install-dir=/usr/local/bin --filename=composer
-
-# Membuat grup dan pengguna 'www' untuk menjalankan aplikasi
-RUN groupadd -g 1000 www 
-RUN useradd -u 1000 -ms /bin/bash -g www www
-
-# Menyalin file aplikasi ke dalam container
-COPY . .
-
-# Mengubah kepemilikan file menjadi 'www'
+# Menyalin file aplikasi ke dalam container dan mengubah kepemilikan file
 COPY . --chown=www:www .
 
 # Menentukan user yang digunakan untuk menjalankan aplikasi
