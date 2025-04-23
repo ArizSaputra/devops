@@ -1,13 +1,13 @@
 FROM php:8.0-fpm
 
-# Membuat direktori jika belum ada
+# Membuat direktori /var/www/devops sebelum menjalankan perintah lainnya
 RUN mkdir -p /var/www/devops
-
-# Menyalin composer.* ke dalam direktori kerja di container
-COPY composer.* /var/www/devops/
 
 # Menentukan direktori kerja di dalam container
 WORKDIR /var/www/devops
+
+# Menyalin composer.* ke dalam direktori kerja di container
+COPY composer.* /var/www/devops/
 
 # Menginstal dependensi yang dibutuhkan dalam satu RUN untuk mengurangi lapisan
 RUN apt-get update && apt-get install -y \
