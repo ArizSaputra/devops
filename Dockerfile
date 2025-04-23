@@ -20,7 +20,9 @@ RUN apt-get update && apt-get install -y \
     locales \
     jpegoptim optipng pngquant gifsicle vim unzip git curl libzip-dev zip \
     && docker-php-ext-install pdo pdo_mysql gd zip \
-    && curl -sS https://getcomposer.org/installer | php --install-dir=/usr/local/bin --filename=composer \
+    && curl -sS https://getcomposer.org/installer -o /tmp/composer-installer.php \
+    && php /tmp/composer-installer.php --install-dir=/usr/local/bin --filename=composer \
+    && rm /tmp/composer-installer.php \
     && groupadd -g 1000 www \
     && useradd -u 1000 -ms /bin/bash -g www www
 
