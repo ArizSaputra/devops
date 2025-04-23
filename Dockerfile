@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y \
 
 # Menyalin file aplikasi ke dalam container dan mengubah kepemilikan file
 # Memastikan direktori target sudah ada dan menggunakan chown dengan benar
-COPY . /var/www/devops/ --chown=www:www
+COPY --chown=www:www . .
 
 # Menentukan user yang digunakan untuk menjalankan aplikasi
 USER www
