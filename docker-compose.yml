@@ -16,7 +16,7 @@ services:
 
   webserver:
     image: nginx:alpine
-    container_name: nginxlaraveldocker
+    container_name: nginxdevops
     restart: unless-stopped
     tty: true
     ports:
@@ -29,7 +29,7 @@ services:
 
   db:
     image: mysql:5.7
-    container_name: dblaraveldocker
+    container_name: dbdevops
     restart: always
     tty: true
     ports:
@@ -42,11 +42,11 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
-      - laraveldocker
+      - devops
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: pmalaraveldocker
+    container_name: pmadevops
     links:
       - db
     restart: always
