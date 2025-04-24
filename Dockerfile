@@ -1,4 +1,4 @@
-FROM php:8.0-fpm
+FROM php:8.1-fpm
 
 # Membuat direktori /var/www/devops sebelum menjalankan perintah lainnya
 RUN mkdir -p /var/www/devops
